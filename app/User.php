@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\SocialLogin;
+use App\Jobs;
+use App\Rating;
+use App\Profile;
+use App\UserCategory;
 
 class User extends Authenticatable
 {
@@ -15,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password',
+        'id', 'first_name', 'last_name', 'email', 'password',
     ];
 
     /**
@@ -26,4 +31,36 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public $incrementing = false;
+
+    public function socialLogin()
+    {
+        return $this->hasMany('SocialLogin');
+    }
+
+    public function jobs()
+    {
+        return $this->hasMany('Jobs');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne('Profile');
+    }
+
+    public function rating()
+    {
+        return $this->hasMany('Rating');
+    }
+
+    public function user_category()
+    {
+        return $this->hasMany('UserCategory');
+    }
+
+    public function fullName()
+    {
+        return $this->first_name .' '. $this->last_name;
+    }
 }

@@ -17,6 +17,7 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
+    @yield('added_css')
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -54,6 +55,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
+                            <li><a href="{{ url('/') }}">Back To Home</a></li>
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
@@ -81,8 +83,9 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        @include('layouts.errors')
+        <!-- Your Page Content Here -->
+        @yield('content')            
     </div>
 
     <!-- Scripts -->
